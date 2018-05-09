@@ -2,11 +2,11 @@ extends layout
 
 block content
     h1= title
-    form#formNewPlayer(name="newplayer",method="post",action="/newplayer")
-        input#inputPlayerFirstName(type="text", placeholder="First Name", name="firstname")
-        input#inputPlayerLastName(type="text", placeholder="Last Name", name="lastname")
+    form#formNewPlayer(name="newplayer",method="post",action="/players/")
+        input#inputPlayerFirstName(type="text", placeholder="First Name", name="firstname" required)
+        input#inputPlayerLastName(type="text", placeholder="Last Name", name="lastname" required)
         input#inputPlayerNickname(type="text", placeholder="Nickname", name="nickname")
-        input#inputPlayerNumber(type="number", placeholder="Jersey Number", name="number")
-        input#inputPlayerPosition(type="text", placeholder="Position", name="position")
-        input#inputPlayerTeamID(type="number", placeholder="Team ID", name="teamid")
+        input#inputPlayerNumber(type="number", placeholder="Jersey Number", name="number" required)
+        input#inputPlayerPosition(type="text", placeholder="Position", name="position" required)
+        input#inputPlayerTeamID(type="number", placeholder="Team ID", name="teamid" required)
         button#btnSubmit(type="submit") submit

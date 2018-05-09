@@ -141,26 +141,26 @@ module.exports = {
     
     post_addplayer : function(req, res) {
         var requestData = req.body;
-        if (!requestData.firstname ) {
-            return res.status(400).json({
-                code: "playerCreationFailed",
-                message: "Player was not added to the database."
-            });
-        }
 
         var firstName = requestData.firstname;
         var lastName = requestData.lastname;
         var nickname = requestData.nickname;
         var number = requestData.number;
-        var position = requestData.position;
         var teamID = req.body.teamid;
         
+        if (!firstName || !lastName || !number || !teamID ) {
+            return res.status(400).json({
+                code: "playerCreationFailed",
+                message: "Player was not added to the database. Please provide all required inputs."
+            });
+        }
+        
         var player = {
-            FirstName: requestData.firstname,
-            LastName: requestData.lastname,
-            Nickname: requestData.nickname,
-            Number: requestData.number,
-            TeamID: requestData.teamid
+            FirstName: firstName,
+            LastName: lastName,
+            Nickname: nickname,
+            Number: number,
+            TeamID: teamID
         };
         
         connection.query(
@@ -176,11 +176,14 @@ module.exports = {
                 
                 //The next ID which was given to the newly created player
                 var insertID = results.insertId;
-
+                var playerPosition = req.body.position;
+                
                 var position = {
-                    Position: requestData.position,
+                    Position: playerPosition,
                     PlayerID: insertID
                 };
+                
+                
                 
                 connection.query(
                     "INSERT INTO player_position SET ?", position
@@ -200,6 +203,10 @@ module.exports = {
                         });
                     });
             });
+    },
+    
+    post_editplayer : function(req, res) {
+        var requestData = req.body;
     }
     
     
@@ -215,6 +222,6 @@ module.exports = {
     
     
     
-    
+
     
 }

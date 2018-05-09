@@ -16,8 +16,10 @@ app.set('view engine', 'jade');
 
 app.get('/', ctrlMain.home);
 
-app.get('/newplayer', ctrlMain.get_newplayer)
-app.post('/newplayer', modelMain.post_addplayer)
+app.get('/players/new', ctrlMain.get_newplayer);
+app.post('/players', modelMain.post_addplayer);
+app.get('/players/:playerid/edit', ctrlMain.get_editplayer);
+app.post('/players/:playerid');
 
 app.get('/players', modelMain.getPlayers);
 app.get('/players/:playerid', modelMain.showPlayerByID);
