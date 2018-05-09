@@ -141,13 +141,13 @@ module.exports = {
     
     post_addplayer : function(req, res) {
         var requestData = req.body;
-        if (!requestData.firstName ) {
+        if (!requestData.firstname ) {
             return res.status(400).json({
                 code: "playerCreationFailed",
                 message: "Player was not added to the database."
             });
         }
-        console.log("TEST1");
+
         var firstName = requestData.firstname;
         var lastName = requestData.lastname;
         var nickname = requestData.nickname;
@@ -162,7 +162,6 @@ module.exports = {
             Number: requestData.number,
             TeamID: requestData.teamid
         };
-        console.log("TEST2");
         
         connection.query(
             "INSERT INTO player SET ?", player
@@ -197,7 +196,7 @@ module.exports = {
                         //Successfully added player and player position
                         return res.status(500).json({
                             code: "playerCreationSuccess",
-                            message: requestData.firstName + " " + requestData.lastname + " was added to the database."
+                            message: requestData.firstname + " " + requestData.lastname + " was added to the database."
                         });
                     });
             });
