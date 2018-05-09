@@ -16,12 +16,20 @@ app.set('view engine', 'jade');
 
 app.get('/', ctrlMain.home);
 
-app.get('/players/new', ctrlMain.get_newplayer);
-app.post('/players', modelMain.post_addplayer);
-app.get('/players/:playerid/edit', ctrlMain.get_editplayer);
-app.put('/players/:playerid', modelMain.updatePlayerByID);
+///PLAYERS
 
+//GET NEW PLAYER PAGE
+app.get('/players/new', ctrlMain.get_newplayer);
+//GET EDIT PLAYER PAGE
+app.get('/players/:playerid/edit', ctrlMain.get_editplayer);
+//ADD NEW PLAYER POST REQUEST
+app.post('/players', modelMain.post_addplayer);
+//UPDATE PLAYER PUT REQUEST
+app.put('/players/:playerid', modelMain.updatePlayerByID);
+app.delete('/players/:playerid', modelMain.deletePlayerByID);
+//GET ALL PLAYERS
 app.get('/players', modelMain.getPlayers);
+//GET PLAYER BY ID
 app.get('/players/:playerid', modelMain.showPlayerByID);
 
 

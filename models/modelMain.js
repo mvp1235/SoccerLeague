@@ -184,7 +184,6 @@ module.exports = {
                 };
                 
                 
-                
                 connection.query(
                     "INSERT INTO player_position SET ?", position
                     , function(err, results, fields) {
@@ -197,7 +196,7 @@ module.exports = {
                         }
                         
                         //Successfully added player and player position
-                        return res.status(500).json({
+                        return res.status(200).json({
                             code: "playerCreationSuccess",
                             message: requestData.firstname + " " + requestData.lastname + " was added to the database."
                         });
@@ -207,14 +206,6 @@ module.exports = {
     
     updatePlayerByID : function(req, res) {
         var playerid = req.params.playerid;
-        
-
-        console.log(req.body);
-        console.log(req.body.firstname);
-        console.log(req.body.lastname);
-        console.log(req.body.number);
-        console.log(req.body.teamid);
-        
         
         if (!req.body.firstname || !req.body.lastname || !req.body.number || !req.body.teamid ) {
             return res.status(400).json({
@@ -255,30 +246,56 @@ module.exports = {
                         }
 
                         //Successfully updated player and player position
-                        return res.status(500).json({
+                        return res.status(200).json({
                             code: "playerUpdateSuccess",
-                            message: req.body.firstname + " " + req.body.lastname + " was updated on the database."
+                            message: "Player with ID " + playerid + " was updated on the database."
                         });
                     });
 
                  
             });
                 
+    },
+    
+    deletePlayerByID : function(req, res) {
+        const playerID = req.params.playerid;
+            
+        //DELETE position
+        connection.query(
+        "DELETE FROM player_position WHERE PlayerID = ?", [playerID]
+        , function(err, positionResult, fields) {
+            if (err) {
+                console.log(err);
+                return res.status(500).json({
+                    code: "positionDeleteFailure",
+                    message: "Error occured when deleting player position"
+                });
+            }
+
+            //Delete player
+            connection.query(
+            "DELETE FROM player WHERE PlayerID = ?", [playerID]
+            , function(err, deleteResult, fields) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        code: "playerDeleteFailure",
+                        message: "Player with id " + req.params.playerid + " was not deleted from the database"
+                    });
+                }
+
+                return res.status(200).json({
+                    code: "playerDeleteSuccess",
+                    message: "Player with id " + req.params.playerid + " was deleted from the database"
+                });
+            });
+        });
+        
+        
+        
+        
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-    
 }
