@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+    form#formNewPlayer(name="newplayer",method="post",action="/newplayer")
+        input#inputPlayerFirstName(type="text", placeholder="First Name", name="firstname")
+        input#inputPlayerLastName(type="text", placeholder="Last Name", name="lastname")
+        input#inputPlayerNickname(type="text", placeholder="Nickname", name="nickname")
+        input#inputPlayerNumber(type="number", placeholder="Jersey Number", name="number")
+        input#inputPlayerPosition(type="text", placeholder="Position", name="position")
+        input#inputPlayerTeamID(type="number", placeholder="Team ID", name="teamid")
+        button#btnSubmit(type="submit") submit

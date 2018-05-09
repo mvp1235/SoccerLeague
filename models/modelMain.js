@@ -137,6 +137,85 @@ module.exports = {
                 data: results
             });
         });
+    },
+    
+    post_addplayer : function(req, res) {
+        var requestData = req.body;
+        if (!requestData.firstName ) {
+            return res.status(400).json({
+                code: "playerCreationFailed",
+                message: "Player was not added to the database."
+            });
+        }
+        console.log("TEST1");
+        var firstName = requestData.firstname;
+        var lastName = requestData.lastname;
+        var nickname = requestData.nickname;
+        var number = requestData.number;
+        var position = requestData.position;
+        var teamID = req.body.teamid;
+        
+        var player = {
+            FirstName: requestData.firstname,
+            LastName: requestData.lastname,
+            Nickname: requestData.nickname,
+            Number: requestData.number,
+            TeamID: requestData.teamid
+        };
+        console.log("TEST2");
+        
+        connection.query(
+            "INSERT INTO player SET ?", player
+            , function(err, results, fields) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        code: "playerCreationFailed",
+                        message: "Player was not added to the database."
+                    });
+                }
+                
+                //The next ID which was given to the newly created player
+                var insertID = results.insertId;
+
+                var position = {
+                    Position: requestData.position,
+                    PlayerID: insertID
+                };
+                
+                connection.query(
+                    "INSERT INTO player_position SET ?", position
+                    , function(err, results, fields) {
+                        if (err) {
+                            console.log(err);
+                            return res.status(500).json({
+                                code: "positionCreationFailed",
+                                message: "Position was not added to the database."
+                            });
+                        }
+                        
+                        //Successfully added player and player position
+                        return res.status(500).json({
+                            code: "playerCreationSuccess",
+                            message: requestData.firstName + " " + requestData.lastname + " was added to the database."
+                        });
+                    });
+            });
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
