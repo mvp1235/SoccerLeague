@@ -2,7 +2,8 @@ extends layout
 
 block content
     h1= title
-    form#formEditPlayer(name="editplayer",method="post",action="/players/!{JSON.stringify(playerid)}")
+    form#formEditPlayer(name="editplayer",method="post",action="/players/#{playerid}")
+        input#inputPlayerID(type="number", name="playerid" hidden)
         input#inputPlayerFirstName(type="text", placeholder="First Name", name="firstname" value="#{firstname}")
         input#inputPlayerLastName(type="text", placeholder="Last Name", name="lastname")
         input#inputPlayerNickname(type="text", placeholder="Nickname", name="nickname")

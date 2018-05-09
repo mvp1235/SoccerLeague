@@ -19,10 +19,12 @@ app.get('/', ctrlMain.home);
 app.get('/players/new', ctrlMain.get_newplayer);
 app.post('/players', modelMain.post_addplayer);
 app.get('/players/:playerid/edit', ctrlMain.get_editplayer);
-app.post('/players/:playerid');
+app.put('/players/:playerid', modelMain.updatePlayerByID);
 
 app.get('/players', modelMain.getPlayers);
 app.get('/players/:playerid', modelMain.showPlayerByID);
+
+
 app.get('/teams', modelMain.getTeams);
 app.get('/teams/:teamid', modelMain.showTeamByID);
 app.get('/leagues', modelMain.getLeagues);

@@ -146,7 +146,7 @@ module.exports = {
         var lastName = requestData.lastname;
         var nickname = requestData.nickname;
         var number = requestData.number;
-        var teamID = req.body.teamid;
+        var teamID = requestData.teamid;
         
         if (!firstName || !lastName || !number || !teamID ) {
             return res.status(400).json({
@@ -205,8 +205,65 @@ module.exports = {
             });
     },
     
-    post_editplayer : function(req, res) {
-        var requestData = req.body;
+    updatePlayerByID : function(req, res) {
+        var playerid = req.params.playerid;
+        
+
+        console.log(req.body);
+        console.log(req.body.firstname);
+        console.log(req.body.lastname);
+        console.log(req.body.number);
+        console.log(req.body.teamid);
+        
+        
+        if (!req.body.firstname || !req.body.lastname || !req.body.number || !req.body.teamid ) {
+            return res.status(400).json({
+                code: "playerUpdateFailed",
+                message: "Player was not updated. Please provide all required inputs."
+            });
+        }
+        
+        var player = {
+            FirstName : req.body.firstname,
+            LastName : req.body.lastname,
+            Nickname : req.body.nickname,
+            Number : req.body.number,
+            TeamID : req.body.teamid
+        };
+        //Update player database
+        connection.query(
+            "UPDATE player SET ? WHERE PlayerID = ?", [player, playerid]
+            , function(err, result, fields) {
+                if (err) {
+                    console.log(err);
+                    return res.status(500).json({
+                        code: "playerUpdateFailed",
+                        message: "Player was not updated on the database."
+                    });
+                }
+                
+
+                connection.query(
+                    "UPDATE player_position SET Position = ? WHERE PlayerID = ?", [req.body.position, playerid]
+                    , function(err, result, fields) {
+                        if (err) {
+                            console.log(err);
+                            return res.status(500).json({
+                                code: "positionUpdateFailed",
+                                message: "Position was not updated on the database."
+                            });
+                        }
+
+                        //Successfully updated player and player position
+                        return res.status(500).json({
+                            code: "playerUpdateSuccess",
+                            message: req.body.firstname + " " + req.body.lastname + " was updated on the database."
+                        });
+                    });
+
+                 
+            });
+                
     }
     
     
