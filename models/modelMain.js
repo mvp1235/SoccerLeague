@@ -224,7 +224,7 @@ module.exports = {
         //Update player database
         connection.query(
             "UPDATE player SET ? WHERE PlayerID = ?", [player, playerid]
-            , function(err, result, fields) {
+            , function(err, results, fields) {
                 if (err) {
                     console.log(err);
                     return res.status(500).json({
@@ -236,7 +236,7 @@ module.exports = {
 
                 connection.query(
                     "UPDATE player_position SET Position = ? WHERE PlayerID = ?", [req.body.position, playerid]
-                    , function(err, result, fields) {
+                    , function(err, results, fields) {
                         if (err) {
                             console.log(err);
                             return res.status(500).json({
@@ -263,7 +263,7 @@ module.exports = {
         //DELETE position
         connection.query(
         "DELETE FROM player_position WHERE PlayerID = ?", [playerID]
-        , function(err, positionResult, fields) {
+        , function(err, positionResults, fields) {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -275,7 +275,7 @@ module.exports = {
             //Delete player
             connection.query(
             "DELETE FROM player WHERE PlayerID = ?", [playerID]
-            , function(err, deleteResult, fields) {
+            , function(err, deleteResults, fields) {
                 if (err) {
                     console.log(err);
                     return res.status(500).json({

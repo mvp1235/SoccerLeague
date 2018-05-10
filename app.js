@@ -4,11 +4,15 @@ var ctrlMain = require('./controllers/ctrlMain');
 var modelMain = require('./models/modelMain');
 var path = require('path');
 var logger = require('morgan');
+var methodOverride = require('method-override');
 var app = express();
 
 //applying middlewares
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+//Method override - POST TO PUT
+app.use(methodOverride('_method'))
 
 //View engine setup
 app.set('views', path.join(__dirname, 'views'));
