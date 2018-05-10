@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    h1= title
+    p OK to delete Player #{playername} with ID #{playerid}?
+    form#formDelelePlayer(name="deleteplayer", method="post", action="/players/#{playerid}?_method=DELETE")
+        button#btnSubmit(type="submit") Delete

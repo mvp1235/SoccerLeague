@@ -35,6 +35,8 @@ app.get('/', ctrlMain.home);
 app.get('/players/new', ctrlPlayer.get_newplayer);
 //GET EDIT PLAYER PAGE
 app.get('/players/:playerid/edit', ctrlPlayer.get_editplayer);
+//GET DELETE PLAYER PAGE
+app.get('/players/:playerid/delete', ctrlPlayer.get_deleteplayer);
 //ADD NEW PLAYER POST REQUEST
 app.post('/players', modelPlayer.post_addplayer);
 //UPDATE PLAYER PUT REQUEST
@@ -51,6 +53,8 @@ app.get('/players/:playerid', modelPlayer.showPlayerByID);
 app.get('/teams/new', ctrlTeam.get_newteam);
 //GET EDIT TEAM PAGE
 app.get('/teams/:teamid/edit', ctrlTeam.get_editteam);
+//GET DELETE TEAM PAGE
+app.get('/teams/:teamid/delete', ctrlTeam.get_deleteteam);
 //ADD NEW TEAM POST REQUEST
 app.post('/teams', modelTeam.post_addteam);
 //UPDATE TEAM PUT REQUEST
@@ -68,6 +72,8 @@ app.get('/teams/:teamid', modelTeam.showTeamByID);
 app.get('/leagues/new', ctrlLeague.get_newleague);
 //GET EDIT LEAGUE PAGE
 app.get('/leagues/:leagueid/edit', ctrlLeague.get_editleague);
+//GET DELETE TEAM PAGE
+app.get('/leagues/:leagueid/delete', ctrlLeague.get_deleteleague);
 //ADD NEW LEAGUE POST REQUEST
 app.post('/leagues', modelLeague.post_addleague);
 //UPDATE LEAGUE PUT REQUEST
@@ -85,6 +91,8 @@ app.get('/leagues/:leagueid', modelLeague.showLeagueByID);
 app.get('/goals/new', ctrlGoal.get_newgoal);
 //GET EDIT GOAL PAGE
 app.get('/goals/:goalid/edit', ctrlGoal.get_editgoal);
+//GET DELETE GOAL PAGE
+app.get('/goals/:goalid/delete', ctrlGoal.get_deletegoal);
 //ADD NEW GOAL POST REQUEST
 app.post('/goals', modelGoal.post_addgoal);
 //UPDATE GOAL PUT REQUEST

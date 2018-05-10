@@ -16,7 +16,7 @@ module.exports = {
                 "WHERE p.TeamID = t.TeamID AND p.PlayerID = pp.PlayerID AND p.PlayerID = ?", [player_id]
             , function(err, results, fields) {
                 if (err) {
-                    return res.send(err);
+                    console.log(err);
                     return res.send("Error accessing database");
                 } else if (results.length === 0) {
                     return res.send("No player with given ID exists in the database.");
@@ -34,6 +34,28 @@ module.exports = {
                     });
                 }
             });
+    },
+    
+    get_deleteplayer : function(req, res) {
+        const player_id = parseInt(req.params.playerid);
+        connection.query(
+        "SELECT * FROM player WHERE PlayerID = ?", [player_id]
+        , function(err, results, fields) {
+            if (err) {
+                console.log(err);
+                return res.send("Error accessing database");
+            } else if (results.length === 0) {
+                return res.send("No player with given ID exists in the database");
+            } else {
+                var playername = results[0].FirstName + " " + results[0].LastName;
+                res.render('deleteplayer', 
+                {
+                    "title" : "Delete Player " + playername,
+                    "playername" : playername,
+                    "playerid" : results[0].PlayerID
+                });
+            }
+        });
     }
     
 }

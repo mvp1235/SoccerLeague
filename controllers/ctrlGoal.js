@@ -5,6 +5,10 @@ module.exports = {
     
     get_editgoal : function(req, res) {
         const goal_id = parseInt(req.params.goalid);
+    },
+    
+    get_deletegoal : function(req, res) {
+        const goal_id = parseInt(req.params.goalid);
     }
     
 }
