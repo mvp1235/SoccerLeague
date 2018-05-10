@@ -4,7 +4,7 @@ module.exports = {
     
     getPlayers : function(req, res) {
         connection.query(
-            "SELECT PlayerID, CONCAT(FirstName, ' ', LastName) FullName, Number, TeamName " + 
+            "SELECT PlayerID, CONCAT(FirstName, ' ', LastName) FullName, Number, team.TeamID, TeamName " + 
                 "FROM player, team " + 
                 "WHERE player.TeamID = team.TeamID"
             , function(err, results, fields) {
@@ -15,17 +15,15 @@ module.exports = {
                    message: "Error occured while getting players from database."
                });
             } 
-            return res.status(200).json({
-                code: "playersFound",
-                data: results
-            });
+
+            res.render('playerlist', {rows: results});
         });
     },
     
     showPlayerByID : function(req, res) {
         const player_id = parseInt(req.params.playerid);
         connection.query(
-            "SELECT p.PlayerID, CONCAT(FirstName, ' ', LastName) FullName, NickName, Number, Position, TeamName " + 
+            "SELECT p.PlayerID, CONCAT(FirstName, ' ', LastName) FullName, NickName, Number, Position, t.TeamID, TeamName " + 
                 "FROM player as p, team as t, player_position as pp " + 
                 "WHERE p.TeamID = t.TeamID AND p.PlayerID = pp.PlayerID AND p.PlayerID = ?", [player_id]
             , function(err, results, fields) {
@@ -42,10 +40,8 @@ module.exports = {
                     message: "No player with given ID existed."
                 });
             }
-            return res.status(200).json({
-                code: "playerFound",
-                data: results
-            });
+                
+            res.render('playerdetail', {rows: results});
         });
     },
     
@@ -106,10 +102,11 @@ module.exports = {
                         }
                         
                         //Successfully added player and player position
-                        return res.status(200).json({
+                        res.status(200).json({
                             code: "playerCreationSuccess",
                             message: requestData.firstname + " " + requestData.lastname + " was added to the database."
                         });
+
                     });
             });
     },

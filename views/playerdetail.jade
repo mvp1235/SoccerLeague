@@ -1,0 +1,31 @@
+extends layout
+
+block content
+    h1 Player Detail
+    
+    table(border="1")
+        thead
+            tr
+                th PlayerID
+                th FullName
+                th NickName
+                th Number
+                th Position
+                th TeamName
+        tbody
+            - var player = rows[0]
+            tr
+                td #[a(href="/players/#{player.PlayerID}") #{player.PlayerID}]
+                td #[a(href="/players/#{player.PlayerID}") #{player.FullName}]
+                td= player.NickName
+                td= player.Number
+                td= player.Position
+                td #[a(href="/teams/#{player.TeamID}") #{player.TeamName}]
+                
+    p.
+        #[a(href="/players/#{player.PlayerID}/edit") Edit]
+    p.
+        #[a(href="/players/#{player.PlayerID}/delete") Delete]
+
+    
+    

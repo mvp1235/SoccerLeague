@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 Player List
+    
+    table(border="1")
+        thead
+            tr
+                th PlayerID
+                th FullName
+                th Number
+                th TeamName
+        tbody
+            - each item in rows
+                tr
+                    td #[a(href="/players/#{item.PlayerID}") #{item.PlayerID}]
+                    td #[a(href="/players/#{item.PlayerID}") #{item.FullName}]
+                    td= item.Number
+                    td #[a(href="/teams/#{item.TeamID}") #{item.TeamName}]
+                    
+    
