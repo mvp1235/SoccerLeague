@@ -140,7 +140,7 @@ module.exports = {
                     });
                 }
                 
-
+                //Update position
                 connection.query(
                     "UPDATE player_position SET Position = ? WHERE PlayerID = ?", [req.body.position, playerid]
                     , function(err, results, fields) {
@@ -167,34 +167,21 @@ module.exports = {
     deletePlayerByID : function(req, res) {
         const playerID = req.params.playerid;
             
-        //DELETE position
+        //Delete player
         connection.query(
-        "DELETE FROM player_position WHERE PlayerID = ?", [playerID]
-        , function(err, positionResults, fields) {
+        "DELETE FROM player WHERE PlayerID = ?", [playerID]
+        , function(err, results, fields) {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
-                    code: "positionDeleteFailure",
-                    message: "Error occured when deleting player position"
+                    code: "playerDeleteFailure",
+                    message: "Player with id " + req.params.playerid + " was not deleted from the database"
                 });
             }
 
-            //Delete player
-            connection.query(
-            "DELETE FROM player WHERE PlayerID = ?", [playerID]
-            , function(err, deleteResults, fields) {
-                if (err) {
-                    console.log(err);
-                    return res.status(500).json({
-                        code: "playerDeleteFailure",
-                        message: "Player with id " + req.params.playerid + " was not deleted from the database"
-                    });
-                }
-
-                return res.status(200).json({
-                    code: "playerDeleteSuccess",
-                    message: "Player with id " + req.params.playerid + " was deleted from the database"
-                });
+            return res.status(200).json({
+                code: "playerDeleteSuccess",
+                message: "Player with id " + req.params.playerid + " was deleted from the database"
             });
         });
         

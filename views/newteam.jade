@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    form#formNewTeam(name="newteam",method="post",action="/teams/")
+        input#inputTeamNamee(type="text", placeholder="Team name", name="teamname" required)
+        input#inputTeamCity(type="text", placeholder="Team city", name="teamcity" required)
+        input#inputTeamLeagueID(type="number", placeholder="League ID", name="leagueid")
+        button#btnSubmit(type="submit") submit

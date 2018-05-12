@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    h1 Team Detail
+    
+    p.
+        #[a(href="/teams") Back to Team List]
+    
+    table(border="1")
+        thead
+            tr
+                th TeamID
+                th TeamName
+                th City
+                th LeagueName
+        tbody
+            - var team = rows[0]
+            tr
+                td #[a(href="/teams/#{team.TeamID}") #{team.TeamID}]
+                td #[a(href="/teams/#{team.TeamID}") #{team.TeamName}]
+                td= team.City
+                td #[a(href="/leagues/#{team.LeagueID}") #{team.LeagueName}]
+                
+    p.
+        #[a(href="/teams/#{team.TeamID}/edit") Edit]
+    p.
+        #[a(href="/teams/#{team.TeamID}/delete") Delete]
+
+    
+    

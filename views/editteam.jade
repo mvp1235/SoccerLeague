@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    h1= title
+    form#formEditTeam(name="editteam",method="post",action="/teams/#{teamid}?_method=PUT")
+        input#inputTeamName(type="text", placeholder="Team name", name="teamname" value="#{teamname}")
+        input#inputTeamCity(type="text", placeholder="Team city", name="teamcity" value="#{teamcity}")
+        input#inputTeamLeagueID(type="number", placeholder="League ID", name="leagueid" value="#{leagueid}")
+        button#btnSubmit(type="submit") submit

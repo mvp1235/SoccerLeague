@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 Team List
+    
+    table(border="1")
+        thead
+            tr
+                th TeamID
+                th TeamName
+                th City
+                th LeagueName
+        tbody
+            - each item in rows
+                tr
+                    td #[a(href="/teams/#{item.TeamID}") #{item.TeamID}]
+                    td #[a(href="/teams/#{item.TeamID}") #{item.TeamName}]
+                    td= item.City
+                    td #[a(href="/leagues/#{item.LeagueID}") #{item.LeagueName}]
+                    
+    

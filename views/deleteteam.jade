@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    h1= title
+    p OK to delete Team #{teamname} with ID #{teamid}?
+    form#formDeleteTeam(name="deleteplayer", method="post", action="/teams/#{teamid}?_method=DELETE")
+        button#btnSubmit(type="submit") Delete
+    
+    button(onclick="cancelDelete()") Cancel
+    script.
+        function cancelDelete() {
+            window.location.href = '/teams/#{teamid}'
+        }
