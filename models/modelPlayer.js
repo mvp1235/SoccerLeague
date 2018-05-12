@@ -175,13 +175,13 @@ module.exports = {
                 console.log(err);
                 return res.status(500).json({
                     code: "playerDeleteFailure",
-                    message: "Player with id " + req.params.playerid + " was not deleted from the database"
+                    message: "Player with id " + playerID + " was not deleted from the database"
                 });
             }
 
             return res.status(200).json({
                 code: "playerDeleteSuccess",
-                message: "Player with id " + req.params.playerid + " was deleted from the database"
+                message: "Player with id " + playerID + " was deleted from the database"
             });
         });
         

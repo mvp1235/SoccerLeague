@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1= title
+    form#formNewLeague(name="newleague",method="post",action="/leagues/")
+        input#inputLeagueName(type="text", placeholder="League Name", name="leaguename" required)
+        input#inputLeagueCountry(type="text", placeholder="Country", name="country" required)
+        button#btnSubmit(type="submit") submit

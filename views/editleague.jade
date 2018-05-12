@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h1= title
+    form#formEditLeague(name="editleague",method="post",action="/leagues/#{leagueid}?_method=PUT")
+        input#onputLeagueName(type="text", placeholder="League Name", name="leaguename" value="#{leaguename}")
+        input#inputLeagueCountry(type="text", placeholder="Country", name="country" value="#{country}")
+        button#btnSubmit(type="submit") submit

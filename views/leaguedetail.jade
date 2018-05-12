@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    h1 League Detail
+    
+    p.
+        #[a(href="/leagues") Back to League List]
+    
+    table(border="1")
+        thead
+            tr
+                th LeagueID
+                th LeagueName
+                th Country
+        tbody
+            - var league = rows[0]
+            tr
+                td #[a(href="/leagues/#{league.LeagueID}") #{league.LeagueID}]
+                td #[a(href="/leagues/#{league.LeagueID}") #{league.LeagueName}]
+                td= league.Country
+                
+    p.
+        #[a(href="/leagues/#{league.LeagueID}/edit") Edit]
+    p.
+        #[a(href="/leagues/#{league.LeagueID}/delete") Delete]
+
+    
+    
