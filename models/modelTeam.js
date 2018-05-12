@@ -3,7 +3,7 @@ var connection = require('../mysql').connection;
 module.exports = {
     getTeams : function(req, res) {
         connection.query(
-            "SELECT TeamID, TeamName, City, LeagueName " +
+            "SELECT TeamID, TeamName, City, league.LeagueID, LeagueName " +
             "FROM team, league " +
             "WHERE team.LeagueID = league.LeagueID " + 
             "ORDER BY TeamID"
