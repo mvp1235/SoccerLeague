@@ -26,7 +26,7 @@ module.exports = {
             "SELECT TeamID, TeamName, City, league.LeagueID, LeagueName " +
             "FROM team, league " +
             "WHERE team.LeagueID = league.LeagueID AND TeamID = ?",[team_id]
-            , function(err, results, fields) {
+            , function(err, teamResults, fields) {
             if (err) {
                console.log(err);
                return res.status(500).json({
@@ -34,14 +34,24 @@ module.exports = {
                    message: "Error occured while getting the team from database."
                });
             } 
-            if (results.length === 0) {
+            if (teamResults.length === 0) {
                 return res.status(404).json({ 
                     code: "teamNotFound",
                     message: "No team with given ID existed."
                 });
             }
+                
+            connection.query(
+            "SELECT PlayerID, CONCAT(FirstName, ' ', LastName) as FullName, Number " +
+                "FROM player WHERE TeamID = ?", [team_id]
+            , function(err, playerResults, fields) {
+                res.render('teamdetail', {
+                    teams: teamResults,
+                    players: playerResults
+                });
+            });
             
-            res.render('teamdetail', {rows: results});
+            
         });
     },
     

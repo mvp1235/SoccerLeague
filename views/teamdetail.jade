@@ -14,7 +14,7 @@ block content
                 th City
                 th LeagueName
         tbody
-            - var team = rows[0]
+            - var team = teams[0]
             tr
                 td #[a(href="/teams/#{team.TeamID}") #{team.TeamID}]
                 td #[a(href="/teams/#{team.TeamID}") #{team.TeamName}]
@@ -27,4 +27,17 @@ block content
         #[a(href="/teams/#{team.TeamID}/delete") Delete]
 
     
+    h2 Players
     
+    table(border="1")
+        thead
+            tr
+                th PlayerID
+                th FullName
+                th Number
+        tbody
+            - each player in players
+                tr
+                    td #[a(href="/players/#{player.PlayerID}") #{player.PlayerID}]
+                    td #[a(href="/players/#{player.PlayerID}") #{player.FullName}]
+                    td= team.City

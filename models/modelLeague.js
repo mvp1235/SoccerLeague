@@ -21,7 +21,7 @@ module.exports = {
         const league_id = parseInt(req.params.leagueid);
         connection.query(
             "SELECT * FROM league WHERE LeagueID = ?",[league_id]
-            , function(err, results, fields) {
+            , function(err, leagueResults, fields) {
             if (err) {
                console.log(err);
                return res.status(500).json({
@@ -29,14 +29,26 @@ module.exports = {
                    message: "Error occured while getting the league from database."
                });
             } 
-            if (results.length === 0) {
+            if (leagueResults.length === 0) {
                 return res.status(404).json({ 
                     code: "leagueNotFound",
                     message: "No league with given ID existed."
                 });
             }
             
-            res.render('leaguedetail', {rows: results});
+            connection.query(
+            "SELECT * FROM team WHERE LeagueID = ?", [league_id]
+                , function(err, teamResults, fields) {
+                    if (err || teamResults.length === 0) {
+                        console.log(err);
+                    }
+                    res.render('leaguedetail', {
+                        leagues: leagueResults,
+                        teams: teamResults
+                    });
+                });
+            
+            
         });
     },
     
