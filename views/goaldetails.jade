@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 Individual Goal Details
+    
+    table(border="1")
+        thead
+            tr
+                th GoalID
+                th LeagueName
+                th TeamName
+                th PlayerName
+                th MatchDate
+                th MinuteScored
+                th SecondScored
+        tbody
+            - each item in rows
+                tr
+                    td= item.GID
+                    td #[a(href="/leagues/#{item.LeagueID}") #{item.LeagueName}]
+                    td #[a(href="/teams/#{item.TeamID}") #{item.TeamName}]
+                    td #[a(href="/players/#{item.PlayerID}") #{item.PlayerName}]
+                    td= item.MatchDate
+                    td= item.MinuteScored
+                    td= item.SecondScored

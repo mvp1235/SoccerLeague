@@ -87,22 +87,11 @@ app.get('/leagues/:leagueid', modelLeague.showLeagueByID);
 
 
 //GOALS///
-//GET NEW GOAL PAGE
-app.get('/goals/new', ctrlGoal.get_newgoal);
-//GET EDIT GOAL PAGE
-app.get('/goals/:goalid/edit', ctrlGoal.get_editgoal);
-//GET DELETE GOAL PAGE
-app.get('/goals/:goalid/delete', ctrlGoal.get_deletegoal);
-//ADD NEW GOAL POST REQUEST
-app.post('/goals', modelGoal.post_addgoal);
-//UPDATE GOAL PUT REQUEST
-app.put('/goals/:goalid', modelGoal.updateGoalByID);
-//DELETE GOAL BY ID
-app.delete('/goals/:goalid', modelGoal.deleteGoalByID);
-//GET ALL LEAGUES
-app.get('/goals', modelGoal.getGoals);
-//GET LEAGUE BY ID
-app.get('/goals/:goalid', modelGoal.showGoalByID);
+app.get('/goals', ctrlGoal.get_goalPage);
+app.get('/goals/players', modelGoal.getGoalPerPlayer);
+app.get('/goals/detail', modelGoal.getGoalDetails);
+app.get('/goals/teams', modelGoal.getGoalPerTeam);
+
 
 
 app.listen(3000, function() {

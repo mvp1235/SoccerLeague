@@ -1,14 +1,5 @@
 module.exports = {
-    get_newgoal : function(req, res) {
-        
-    },
-    
-    get_editgoal : function(req, res) {
-        const goal_id = parseInt(req.params.goalid);
-    },
-    
-    get_deletegoal : function(req, res) {
-        const goal_id = parseInt(req.params.goalid);
+    get_goalPage : function(req, res) {
+        res.render('goals');
     }
-    
 }

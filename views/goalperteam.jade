@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1 Goals By Team
+    
+    table(border="1")
+        thead
+            tr
+                th LeagueName
+                th TeamName
+                th Goals
+        tbody
+            - each item in rows
+                tr
+                    td #[a(href="/leagues/#{item.LeagueID}") #{item.LeagueName}]
+                    td #[a(href="/teams/#{item.TeamID}") #{item.TeamName}]
+                    td= item.Goals
